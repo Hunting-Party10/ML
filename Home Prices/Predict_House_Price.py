@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.impute import SimpleImputer
 
 training_set_path = 'train.csv'
 test_set_path = 'test.csv'
@@ -7,13 +8,16 @@ test_set_path = 'test.csv'
 training_set = pd.read_csv(training_set_path)
 test_set = pd.read_csv(test_set_path)
 
-#print(training_set.columns)
 
-features =['MSSubClass', 'LotArea']
+features =['MSSubClass', 'LotFrontage' , 'LotArea']
 to_predict = ['SalePrice']
 
 X = training_set[features]
 y = training_set[to_predict]
+
+Xnew = X.copy()
+test_setnew =test_set.copy()
+cols_with_missinfo = (col for col in ) 
 
 #X.dropna(how = 'any')
 
