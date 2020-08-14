@@ -1,0 +1,26 @@
+!pip install -U -q PyDrive
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+from google.colab import auth
+from oauth2client.client import GoogleCredentials
+
+# Authenticate and create the PyDrive client.
+# This only needs to be done once in a notebook.
+auth.authenticate_user()
+gauth = GoogleAuth()
+gauth.credentials = GoogleCredentials.get_application_default()
+drive = GoogleDrive(gauth)
+
+# Create & upload a file.
+uploaded = drive.CreateFile({'title': 'newtrain.csv'})
+uploaded.SetContentFile('newtrain.csv')
+uploaded.Upload()
+print('Uploaded file with ID {}'.format(uploaded.get('id')))
+
+
+
+
+
+from google.colab import files
+uploaded = files.upload()
+df = pd.read_csv(io.BytesIO(uploaded['train.csv']))
